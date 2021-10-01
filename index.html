@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: navy;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        let dividend = Number(prompt("Enter number: "));
+        let divisor1 = Number(prompt("Enter number: "));
+        var quotient = [];
+        var decimal = 0
+
+        function divide(dividen, divisor) {
+            if (dividen === 0) {
+                if (quotient.length === 0) {
+                    console.log(0)
+                    return
+                } else {
+                    console.log(`The quotient is: ${print(quotient)}`)
+                    return
+                }
+            } else if (dividen >= divisor) {
+                var qo_dividen = getQuotient(dividen, divisor)
+                dividen = qo_dividen.dividen;
+                quotient.push(qo_dividen.quotient)
+                divide(dividen, divisor)
+
+            } else if (dividen < divisor && dividen > 0) {
+                if (!quotient.includes(".")) {
+                    quotient.push(".")
+                    dividen *= 10
+                    decimal += 1
+                    if (decimal < 3) {
+                        divide(dividen, divisor)
+                    } else {
+                        console.log(`The quotient to the nearest 100th is: ${print(quotient)}`)
+                        return
+                    }
+
+                    console.log()
+                } else {
+                    dividen *= 10;
+                    decimal += 1
+                    if (decimal < 3) {
+                        divide(dividen, divisor)
+                    } else {
+                        console.log(`The quotient to the nearest 100th is: ${print(quotient)}`)
+                        return
+                    }
+                }
+            }
+        }
+        // Find quotient
+        function getQuotient(dividen, divisor) {
+            var n = 0;
+            while (dividen >= divisor) {
+                dividen -= divisor;
+                console.log(`Difference:  ${dividen}`)
+                n++;
+            }
+            return {
+                "quotient": n,
+                "dividen": dividen
+            };
+        }
+
+        function print(quotient) {
+
+            var pos = quotient.indexOf(".")
+            return Number(quotient.join().replaceAll(",", ""))
+        }
+        divide(dividend, divisor1)
+    </script>
+</body>
+
+</html>
